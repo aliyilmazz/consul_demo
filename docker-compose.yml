@@ -1,0 +1,43 @@
+version: '2'
+services:
+  consul:
+    image: consul
+    command: consul agent -server -dev -client=0.0.0.0 -ui -bootstrap -log-level warn
+    ports:
+      - "8500:8500"
+
+  reverse-proxy:
+    image: reverse-proxy
+    command: traefik --consulcatalog.endpoint=consul:8500
+    ports:
+      - "8080:8080"
+      - "8081:80"
+      - "8600:53/udp"
+    depends_on:
+      - consul
+    links:
+      - consul
+
+  web:
+    build: ./flaskapp
+    ports:
+      - "5000"
+    environment:
+      - SERVICE_TAGS=traefik.enable=true,traefik.frontend.entryPoints=http,traefik.frontend.rule=Host:localhost
+    volumes:
+      - .:/code
+
+  redis:
+    image: redis
+    links:
+      - web
+
+  registrator:
+    depends_on:
+      - consul
+    image: gliderlabs/registrator:master
+    command: -internal consul://consul:8500
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    links:
+      - consul
