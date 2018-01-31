@@ -2,14 +2,15 @@
 
 clone repository
 ```
-$ git clone git@gitlab.spp42.net:ali.yilmaz/guvenlik-kontrol.git
-$ cd guvenlik-kontrol
+$ git clone git@gitlab.spp42.net:ali.yilmaz/consul-demo.git
+$ cd consul_demo
 ```
 
 checkout to branch
 ```
-$ git checkout registrator_demo
+$ git checkout registrator
 ```
+
 
 build image
 ```
@@ -21,8 +22,7 @@ scale webservices
 $ docker-compose scale web=5
 ```
 
-
-After Execution, visit:
+After running commands above, visit:
 
 - traefik webui: localhost:8080
 
