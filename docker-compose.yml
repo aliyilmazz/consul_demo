@@ -24,6 +24,8 @@ services:
   redis:
     build: ./redis
     command: /bin/bash
+    volumes:
+      - ./redis:/redis_config
     tty: true
     ports:
       - "5052:6379"
@@ -33,6 +35,8 @@ services:
   rabbitmq:
     build: ./rabbitmq
     command: /bin/bash
+    volumes:
+      - ./rabbitmq:/rabbitmq_config
     tty: true
     ports:
       - "5050:5672"
@@ -43,6 +47,8 @@ services:
   mongodb:
     build: ./mongodb
     command: /bin/bash
+    volumes:
+      - ./mongodb:/mongodb_config
     tty: true
     ports:
       - "5053:27017"
@@ -56,6 +62,6 @@ services:
       - ./flaskapp:/flaskapp
     tty: true
     ports:
-      - "5000"
+      - "5000:5000"
     links:
       - consul
