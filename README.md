@@ -26,17 +26,16 @@ in `docker-compose.yml`, we provide docker.sock file to registrator, using the c
 
 ```
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock this way it .
+      - /var/run/docker.sock:/tmp/docker.sock
 ```
 
 this way, registrator can see docker logs, and register containers once they are launched, or de-register them once they are stopped.
 
-feel free to type `docker ps` to see those containers.
+type `docker ps` to view those containers.
 
 ## 3. visit consul
 
 after step 2, check localhost:8500 to verify that registrator successfully registered services labeled `redis` and `web`.
-
 
 ## 4. scale webservices, visit consul again
 
@@ -57,6 +56,6 @@ After scaling, visit:
 
 # Appendices
 
-If you wonder what `docker.sock` means to docker, take a look at this article:
+During my researches, I found this article very helpful. If you wonder what `docker.sock` means to docker, take a look at this article:
 
-https://medium.com/lucjuggery/about-var-run-docker-sock-3bfd276e12fdho
+https://medium.com/lucjuggery/about-var-run-docker-sock-3bfd276e12fd
