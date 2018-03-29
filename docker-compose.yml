@@ -1,0 +1,67 @@
+version: '3'
+services:
+  consul:
+    image: consul
+    tty: true
+    command: /bin/sh
+    ports:
+      - "18500:8500"
+
+  consul_two:
+    image: consul
+    tty: true
+    command: /bin/sh
+    ports:
+      - "18501:8500"
+
+  consul_three:
+    image: consul
+    tty: true
+    command: /bin/sh
+    ports:
+      - "18502:8500"
+
+  redis:
+    build: ./redis
+    command: /bin/bash
+    volumes:
+      - ./redis:/redis_config
+    tty: true
+    ports:
+      - "5052:6379"
+    links:
+      - consul
+
+  rabbitmq:
+    build: ./rabbitmq
+    command: /bin/bash
+    volumes:
+      - ./rabbitmq:/rabbitmq_config
+    tty: true
+    ports:
+      - "5050:5672"
+      - "5051:15672"
+    links:
+      - consul
+
+  mongodb:
+    build: ./mongodb
+    command: /bin/bash
+    volumes:
+      - ./mongodb:/mongodb_config
+    tty: true
+    ports:
+      - "5053:27017"
+    links:
+      - consul
+
+  flaskapp:
+    build: ./flaskapp
+    command: /bin/bash
+    volumes:
+      - ./flaskapp:/flaskapp
+    tty: true
+    ports:
+      - "5000:5000"
+    links:
+      - consul
