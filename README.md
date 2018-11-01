@@ -224,4 +224,4 @@ http://localhost:18502/v1/catalog/service/flaskapp
 
 # Contact
 
-for any questions/errors, contact ali.yilmaz@spp42.com
+for any questions/errors, contact yilmazalimetu@gmail.com
