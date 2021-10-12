@@ -11,16 +11,18 @@ it is intentionally left for you to start them manually.
 
 for consul connections, `python-consul` library is used. official docs [here](https://python-consul.readthedocs.io/en/latest/)
 
+# Requirements
+
+docker, python, docker-compose, consul
+
 # Instructions
 
 
-## 0. setup environment
+## 0. clone repo
 
 ```
-$ git clone git@gitlab.spp42.net:ali.yilmaz/consul_demo.git
+$ git clone git@github.com:aliyilmazz/consul_demo.git
 $ cd consul_demo
-$ git checkout playground
-
 ```
 
 ## 1. run containers
